@@ -1,0 +1,280 @@
+---
+name: DevSecOps
+description: Comprehensive DevOps and security practices for modern applications
+tags:
+  - devops
+  - security
+  - cicd
+  - kubernetes
+  - docker
+  - infrastructure
+items:
+  # Agents
+  - type: agent
+    path: agents/devops-engineer.agent.md
+    description: CI/CD, containerization, and cloud deployment expert
+  
+  - type: agent
+    path: agents/security-expert.agent.md
+    description: Application security and compliance specialist
+  
+  - type: agent
+    path: agents/architect.agent.md
+    description: System architecture with focus on cloud infrastructure
+---
+
+# DevSecOps Collection
+
+This collection integrates security practices into your DevOps pipeline, ensuring secure and reliable deployments.
+
+## What's Included
+
+### DevOps Expertise
+- **CI/CD Pipeline Design**: GitHub Actions, Jenkins, GitLab CI
+- **Containerization**: Docker best practices and multi-stage builds
+- **Orchestration**: Kubernetes deployments and services
+- **Infrastructure as Code**: Terraform, CloudFormation
+- **Monitoring**: Prometheus, Grafana, logging strategies
+
+### Security Expertise
+- **OWASP Top 10**: Vulnerability prevention and remediation
+- **Secure Coding**: Language-specific security patterns
+- **Authentication**: JWT, OAuth 2.0, OIDC
+- **Compliance**: GDPR, SOC 2, PCI-DSS guidance
+- **Security Testing**: Automated scanning and penetration testing
+
+### Architecture
+- **Cloud Architecture**: AWS, Azure, GCP design patterns
+- **Scalability**: Load balancing, caching, horizontal scaling
+- **High Availability**: Redundancy and failover strategies
+
+## How to Use
+
+### Setting Up CI/CD
+
+1. **Ask the DevOps Engineer**
+   ```
+   @devops-engineer Create a GitHub Actions pipeline for my Node.js app
+   ```
+
+2. **Review security** with the Security Expert
+   ```
+   @security-expert Review this Dockerfile for security issues
+   ```
+
+3. **Get architecture guidance**
+   ```
+   @architect Design a Kubernetes architecture for microservices
+   ```
+
+### Security-First Development
+
+1. **During Development**
+   ```
+   @security-expert Check this authentication implementation
+   ```
+
+2. **Before Deployment**
+   ```
+   @devops-engineer Set up automated security scanning in CI/CD
+   ```
+
+3. **Production Monitoring**
+   ```
+   @devops-engineer Configure Prometheus metrics for security events
+   ```
+
+## Common Workflows
+
+### 1. Setting Up a New Project
+
+```bash
+# 1. Create Dockerfile
+@devops-engineer Create a production-ready Dockerfile for my React app
+
+# 2. Security review
+@security-expert Review this Dockerfile for vulnerabilities
+
+# 3. Set up CI/CD
+@devops-engineer Create GitHub Actions for build, test, and deploy
+
+# 4. Add security scanning
+@security-expert Add Trivy scanning to the pipeline
+```
+
+### 2. Implementing Authentication
+
+```bash
+# 1. Design authentication
+@architect Should I use JWT or session-based auth?
+
+# 2. Implement securely
+@security-expert Implement JWT authentication with refresh tokens
+
+# 3. Review implementation
+@security-expert Review my auth implementation for vulnerabilities
+```
+
+### 3. Deploying to Kubernetes
+
+```bash
+# 1. Create manifests
+@devops-engineer Create Kubernetes deployment and service manifests
+
+# 2. Add security policies
+@security-expert Add network policies and security contexts
+
+# 3. Set up monitoring
+@devops-engineer Configure Prometheus and Grafana for the cluster
+```
+
+## Best Practices Covered
+
+### DevOps
+✅ Infrastructure as Code
+✅ Automated testing in pipelines
+✅ Container security scanning
+✅ Secrets management
+✅ Blue-green and canary deployments
+✅ Monitoring and observability
+✅ Disaster recovery
+
+### Security
+✅ Secure coding practices
+✅ Input validation and sanitization
+✅ Authentication and authorization
+✅ Encryption (at rest and in transit)
+✅ Security headers
+✅ OWASP Top 10 prevention
+✅ Compliance requirements
+
+### Architecture
+✅ Microservices patterns
+✅ API gateway design
+✅ Database scaling strategies
+✅ Caching layers
+✅ Load balancing
+✅ High availability
+✅ Cloud-native architecture
+
+## Security Checklist
+
+Before deploying to production:
+- [ ] All dependencies scanned for vulnerabilities
+- [ ] Secrets stored securely (not in code)
+- [ ] HTTPS/TLS configured
+- [ ] Security headers implemented
+- [ ] Input validation on all endpoints
+- [ ] Authentication and authorization tested
+- [ ] Rate limiting configured
+- [ ] Logging and monitoring active
+- [ ] Backup and recovery tested
+- [ ] Security incident response plan ready
+
+## CI/CD Pipeline Template
+
+```yaml
+name: DevSecOps Pipeline
+
+on: [push, pull_request]
+
+jobs:
+  security-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run Trivy
+        uses: aquasecurity/trivy-action@master
+      - name: Run Snyk
+        uses: snyk/actions/node@master
+  
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run tests
+        run: npm test
+      - name: Upload coverage
+        uses: codecov/codecov-action@v3
+  
+  build:
+    needs: [security-scan, test]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build Docker image
+        run: docker build -t myapp .
+      - name: Scan image
+        run: trivy image myapp
+  
+  deploy:
+    needs: build
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to Kubernetes
+        run: kubectl apply -f k8s/
+```
+
+## Monitoring & Alerting
+
+### Key Metrics to Monitor
+- **Application**: Response time, error rate, throughput
+- **Infrastructure**: CPU, memory, disk, network
+- **Security**: Failed login attempts, unusual access patterns
+- **Business**: User activity, conversion rates
+
+### Alert Configuration
+```yaml
+# Prometheus alert rules
+groups:
+  - name: application
+    rules:
+      - alert: HighErrorRate
+        expr: rate(http_requests_total{status=~"5.."}[5m]) > 0.05
+        annotations:
+          summary: High error rate detected
+      
+      - alert: SlowResponse
+        expr: http_request_duration_seconds{quantile="0.9"} > 1
+        annotations:
+          summary: 90th percentile response time > 1s
+```
+
+## Cloud Security
+
+### AWS
+- IAM roles and policies
+- Security groups
+- VPC configuration
+- KMS for encryption
+- CloudTrail for auditing
+
+### Azure
+- Azure AD integration
+- Network security groups
+- Key Vault
+- Azure Monitor
+
+### GCP
+- Cloud IAM
+- VPC Service Controls
+- Cloud KMS
+- Cloud Audit Logs
+
+## Benefits
+
+✅ Secure by design from the start
+✅ Automated security testing
+✅ Fast, reliable deployments
+✅ Comprehensive monitoring
+✅ Compliance-ready infrastructure
+✅ Reduced security incidents
+✅ Faster incident response
+
+## Learn More
+
+- [OWASP Top 10](https://owasp.org/www-project-top-ten/)
+- [Kubernetes Security Best Practices](https://kubernetes.io/docs/concepts/security/)
+- [Docker Security](https://docs.docker.com/engine/security/)
+- [CI/CD Security](https://www.cisecurity.org/insights/white-papers/ci-cd-pipeline-security)

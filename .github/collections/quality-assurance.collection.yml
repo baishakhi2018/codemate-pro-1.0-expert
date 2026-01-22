@@ -1,0 +1,497 @@
+---
+name: Quality Assurance
+description: Comprehensive testing and code quality practices
+tags:
+  - testing
+  - quality
+  - tdd
+  - code-review
+  - best-practices
+items:
+  # Agents
+  - type: agent
+    path: agents/testing-specialist.agent.md
+    description: Testing strategy and test automation expert
+  
+  - type: agent
+    path: agents/code-reviewer.agent.md
+    description: Code quality and best practices reviewer
+  
+  # Prompts
+  - type: prompt
+    path: prompts/code-review.prompt.md
+    description: Comprehensive code review checklist
+  
+  # Instructions (for test code quality)
+  - type: instruction
+    path: instructions/typescript.instructions.md
+    description: TypeScript best practices for test code
+---
+
+# Quality Assurance Collection
+
+This collection provides comprehensive testing strategies and code quality practices to ensure your software is reliable, maintainable, and bug-free.
+
+## What's Included
+
+### Testing Expertise
+- **Unit Testing**: Fast, isolated tests for functions and methods
+- **Integration Testing**: Component interaction testing
+- **E2E Testing**: Complete user flow validation
+- **Performance Testing**: Load and stress testing
+- **Security Testing**: Vulnerability scanning
+
+### Code Quality
+- **Code Review**: Multi-language best practices
+- **Static Analysis**: Linting and type checking
+- **Coverage Analysis**: Test coverage metrics
+- **Maintainability**: Code complexity and duplication
+
+## Testing Pyramid
+
+```
+        /\
+       /E2E\    10% - Slow, expensive, fragile
+      /------\
+     / INTEG  \  20% - Medium speed, moderate cost
+    /----------\
+   /    UNIT    \ 70% - Fast, cheap, reliable
+  /--------------\
+```
+
+## How to Use
+
+### Setting Up Testing
+
+1. **Design Test Strategy**
+   ```
+   @testing-specialist Design a test strategy for my React app
+   ```
+
+2. **Create Tests**
+   ```
+   @testing-specialist Write unit tests for this TaskService
+   ```
+
+3. **Review Code Quality**
+   ```
+   @code-reviewer Review my implementation and tests
+   ```
+
+### Test-Driven Development (TDD)
+
+1. **Write failing test first**
+   ```
+   @testing-specialist Create a failing test for new feature
+   ```
+
+2. **Implement minimum code to pass**
+   ```
+   Implement the feature to make the test pass
+   ```
+
+3. **Refactor**
+   ```
+   @code-reviewer Suggest refactoring improvements
+   ```
+
+## Language-Specific Testing
+
+### React Testing
+
+**Framework**: Jest + React Testing Library
+
+```typescript
+import { render, screen, userEvent } from '@testing-library/react';
+import { TaskList } from './TaskList';
+
+describe('TaskList', () => {
+  it('should render tasks', () => {
+    const tasks = [{ id: 1, title: 'Test Task' }];
+    render(<TaskList tasks={tasks} />);
+    
+    expect(screen.getByText('Test Task')).toBeInTheDocument();
+  });
+  
+  it('should handle task deletion', async () => {
+    const onDelete = jest.fn();
+    render(<TaskList tasks={tasks} onDelete={onDelete} />);
+    
+    await userEvent.click(screen.getByRole('button', { name: /delete/i }));
+    
+    expect(onDelete).toHaveBeenCalledWith(1);
+  });
+});
+```
+
+**Best Practices:**
+- Test user behavior, not implementation
+- Use semantic queries (getByRole, getByLabelText)
+- Test accessibility
+- Mock API calls
+- Test loading and error states
+
+### Angular Testing
+
+**Framework**: Jasmine + Karma
+
+```typescript
+describe('TaskListComponent', () => {
+  let component: TaskListComponent;
+  let fixture: ComponentFixture<TaskListComponent>;
+  
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      declarations: [TaskListComponent],
+      providers: [TaskService]
+    });
+    
+    fixture = TestBed.createComponent(TaskListComponent);
+    component = fixture.componentInstance;
+  });
+  
+  it('should load tasks on init', () => {
+    component.ngOnInit();
+    
+    expect(component.tasks.length).toBeGreaterThan(0);
+  });
+});
+```
+
+**Best Practices:**
+- Mock services with spies
+- Test observables properly
+- Use fixture.detectChanges() appropriately
+- Test change detection strategy
+
+### Java Testing
+
+**Framework**: JUnit 5 + Mockito
+
+```java
+@ExtendWith(MockitoExtension.class)
+class TaskServiceTest {
+    
+    @Mock
+    private TaskRepository repository;
+    
+    @InjectMocks
+    private TaskService service;
+    
+    @Test
+    void shouldCreateTask() {
+        // Given
+        Task task = new Task("Test");
+        when(repository.save(any())).thenReturn(task);
+        
+        // When
+        Task result = service.create(task);
+        
+        // Then
+        assertThat(result.getTitle()).isEqualTo("Test");
+        verify(repository).save(task);
+    }
+}
+```
+
+**Best Practices:**
+- Use given-when-then structure
+- Test edge cases and exceptions
+- Use AssertJ for fluent assertions
+- Mock external dependencies
+
+### Python Testing
+
+**Framework**: pytest
+
+```python
+import pytest
+from unittest.mock import Mock
+
+class TestTaskService:
+    
+    @pytest.fixture
+    def task_service(self):
+        repository = Mock()
+        return TaskService(repository)
+    
+    def test_create_task_success(self, task_service):
+        # Given
+        task_data = TaskCreate(title="Test")
+        
+        # When
+        result = task_service.create_task(task_data)
+        
+        # Then
+        assert result.title == "Test"
+        task_service.repository.create.assert_called_once()
+```
+
+**Best Practices:**
+- Use fixtures for setup
+- Use descriptive test names
+- Test async code properly
+- Use parametrize for multiple scenarios
+
+## Code Quality Metrics
+
+### Coverage Goals
+- **Line Coverage**: 80%+
+- **Branch Coverage**: 75%+
+- **Function Coverage**: 90%+
+
+### Complexity Limits
+- **Cyclomatic Complexity**: < 10 per function
+- **File Length**: < 500 lines
+- **Function Length**: < 50 lines
+
+### Code Smells to Avoid
+- Long methods
+- Large classes
+- Duplicate code
+- Deep nesting
+- God objects
+- Feature envy
+
+## Testing Workflows
+
+### 1. New Feature Development
+
+```bash
+# Step 1: Design tests
+@testing-specialist What tests do I need for a task filter feature?
+
+# Step 2: Write failing tests
+@testing-specialist Write tests for task filtering by status
+
+# Step 3: Implement feature
+[Implement the feature]
+
+# Step 4: Run tests
+npm test
+
+# Step 5: Review code
+@code-reviewer Review my implementation and tests
+```
+
+### 2. Bug Fix
+
+```bash
+# Step 1: Reproduce bug with test
+@testing-specialist Write a test that reproduces this bug
+
+# Step 2: Verify test fails
+npm test
+
+# Step 3: Fix bug
+[Fix the implementation]
+
+# Step 4: Verify test passes
+npm test
+
+# Step 5: Review
+@code-reviewer Review the fix and test
+```
+
+### 3. Refactoring
+
+```bash
+# Step 1: Ensure tests exist
+@testing-specialist Do I have adequate test coverage for refactoring?
+
+# Step 2: Run tests (should pass)
+npm test
+
+# Step 3: Refactor
+@code-reviewer Suggest refactoring improvements
+
+# Step 4: Run tests (should still pass)
+npm test
+```
+
+## CI/CD Integration
+
+### GitHub Actions Example
+
+```yaml
+name: Quality Checks
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Run linter
+        run: npm run lint
+      
+      - name: Run tests
+        run: npm test -- --coverage
+      
+      - name: Upload coverage
+        uses: codecov/codecov-action@v3
+      
+      - name: Check coverage thresholds
+        run: npm run test:coverage:check
+```
+
+### Coverage Thresholds
+
+```json
+{
+  "jest": {
+    "coverageThreshold": {
+      "global": {
+        "branches": 75,
+        "functions": 90,
+        "lines": 80,
+        "statements": 80
+      }
+    }
+  }
+}
+```
+
+## Testing Best Practices
+
+### Do's ✅
+- Write tests first (TDD)
+- Test one thing per test
+- Use descriptive test names
+- Keep tests independent
+- Mock external dependencies
+- Test edge cases
+- Test error conditions
+- Maintain test code quality
+- Run tests frequently
+- Fix failing tests immediately
+
+### Don'ts ❌
+- Don't test implementation details
+- Don't write fragile tests
+- Don't skip tests
+- Don't ignore failing tests
+- Don't test third-party code
+- Don't use sleep/wait in tests
+- Don't have tests depend on each other
+- Don't test too much in one test
+- Don't mock everything
+
+## Performance Testing
+
+### Load Testing with Artillery
+
+```yaml
+config:
+  target: 'http://localhost:3000'
+  phases:
+    - duration: 60
+      arrivalRate: 10
+    - duration: 120
+      arrivalRate: 50
+    - duration: 60
+      arrivalRate: 10
+
+scenarios:
+  - name: "Task CRUD Operations"
+    flow:
+      - get:
+          url: "/api/tasks"
+      - post:
+          url: "/api/tasks"
+          json:
+            title: "Load Test Task"
+      - think: 1
+```
+
+### Benchmarking
+
+```typescript
+import { performance } from 'perf_hooks';
+
+describe('Performance', () => {
+  it('should process 1000 tasks under 100ms', () => {
+    const start = performance.now();
+    
+    processTasks(generateTasks(1000));
+    
+    const duration = performance.now() - start;
+    expect(duration).toBeLessThan(100);
+  });
+});
+```
+
+## Quality Gates
+
+### Pre-Commit
+- Linting passes
+- Unit tests pass
+- Code formatted
+
+### Pre-Push
+- All tests pass
+- Coverage meets threshold
+- No critical security issues
+
+### Pre-Merge
+- Code review approved
+- Integration tests pass
+- E2E tests pass
+- Documentation updated
+
+### Pre-Deploy
+- All quality checks pass
+- Performance tests pass
+- Security scan clean
+- Deployment tested in staging
+
+## Benefits
+
+✅ Catch bugs early in development
+✅ Confident refactoring
+✅ Better code design
+✅ Living documentation
+✅ Faster debugging
+✅ Reduced production incidents
+✅ Higher code quality
+✅ Team confidence
+
+## Tools Recommendations
+
+### Static Analysis
+- **ESLint** - JavaScript/TypeScript
+- **SonarQube** - Multi-language
+- **Checkstyle** - Java
+- **Pylint** - Python
+
+### Testing Frameworks
+- **Jest** - JavaScript/TypeScript
+- **JUnit** - Java
+- **pytest** - Python
+- **Cypress** - E2E testing
+
+### Coverage
+- **Istanbul** - JavaScript
+- **JaCoCo** - Java
+- **Coverage.py** - Python
+
+### Performance
+- **Artillery** - Load testing
+- **k6** - Performance testing
+- **Lighthouse** - Web performance
+
+## Learn More
+
+- [Test-Driven Development](https://martinfowler.com/bliki/TestDrivenDevelopment.html)
+- [Testing Best Practices](https://github.com/goldbergyoni/javascript-testing-best-practices)
+- [Clean Code](https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882)

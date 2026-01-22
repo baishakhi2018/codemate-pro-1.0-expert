@@ -1,0 +1,166 @@
+---
+name: Full-Stack Development
+description: Complete collection for full-stack development with React, Angular, Java, and Python
+tags: 
+  - fullstack
+  - react
+  - angular
+  - java
+  - python
+  - web-development
+items:
+  # Instructions
+  - type: instruction
+    path: instructions/react.instructions.md
+    description: React development best practices with hooks and TypeScript
+  
+  - type: instruction
+    path: instructions/angular.instructions.md
+    description: Angular development with OnPush detection and RxJS
+  
+  - type: instruction
+    path: instructions/java.instructions.md
+    description: Java and Spring Boot best practices
+  
+  - type: instruction
+    path: instructions/python.instructions.md
+    description: Python and FastAPI development guidelines
+  
+  - type: instruction
+    path: instructions/typescript.instructions.md
+    description: TypeScript strict mode and type safety
+  
+  # Agents
+  - type: agent
+    path: agents/code-reviewer.agent.md
+    description: Expert code reviewer for all supported languages
+  
+  - type: agent
+    path: agents/architect.agent.md
+    description: System architecture and design expert
+  
+  - type: agent
+    path: agents/testing-specialist.agent.md
+    description: Testing strategy and automation expert
+  
+  # Prompts
+  - type: prompt
+    path: prompts/add-feature.prompt.md
+    description: Guided workflow for adding new features
+  
+  - type: prompt
+    path: prompts/code-review.prompt.md
+    description: Comprehensive code review checklist
+  
+  # Chat Modes
+  - type: chatmode
+    path: chatmodes/react-expert.chatmode.md
+    description: React development expert persona
+---
+
+# Full-Stack Development Collection
+
+This collection provides everything you need for full-stack development across React, Angular, Java, and Python.
+
+## What's Included
+
+### Frontend Development
+- **React Instructions**: Modern React with hooks, TypeScript, and Tailwind CSS
+- **Angular Instructions**: RxJS, reactive forms, and OnPush change detection
+- **TypeScript Instructions**: Strict typing and best practices
+
+### Backend Development
+- **Java Instructions**: Spring Boot, SOLID principles, and clean architecture
+- **Python Instructions**: FastAPI, type hints, and async patterns
+
+### Quality & Architecture
+- **Code Reviewer Agent**: Multi-language code review expert
+- **Architect Agent**: System design and scalability expert
+- **Testing Specialist Agent**: Test strategy and automation
+
+### Workflows
+- **Add Feature Prompt**: Step-by-step feature development
+- **Code Review Prompt**: Comprehensive review checklist
+
+## How to Use
+
+1. **Open your project** in VS Code
+2. **Copy this collection** to your `.github/collections/` directory
+3. **Start coding** - Copilot will automatically apply the right instructions based on file type
+
+## Language-Specific Features
+
+### React (.tsx, .jsx)
+```typescript
+// Copilot will generate:
+- Functional components with hooks
+- TypeScript interfaces
+- Tailwind CSS styling
+- Accessibility features
+```
+
+### Angular (.component.ts, .service.ts)
+```typescript
+// Copilot will generate:
+- OnPush change detection
+- RxJS observables
+- Reactive forms
+- Dependency injection
+```
+
+### Java (.java)
+```java
+// Copilot will generate:
+- Spring Boot annotations
+- Constructor injection
+- Optional handling
+- Stream API
+```
+
+### Python (.py)
+```python
+# Copilot will generate:
+- Type hints
+- Async/await
+- Pydantic models
+- FastAPI patterns
+```
+
+## Example Workflow
+
+### Building a Feature
+
+1. **Ask the Architect**
+   ```
+   @architect How should I structure a multi-tenant task system?
+   ```
+
+2. **Create the code** (following language instructions automatically)
+   ```
+   Create a TaskService with CRUD operations
+   ```
+
+3. **Use the Code Reviewer**
+   ```
+   @code-reviewer Review this implementation
+   ```
+
+4. **Add tests with Testing Specialist**
+   ```
+   @testing-specialist Create tests for this service
+   ```
+
+## Tips for Best Results
+
+- **Be specific** about the language/framework in your prompts
+- **Use agents** for expert guidance on specific aspects
+- **Reference files** to give Copilot more context
+- **Invoke prompts** with `/` commands for guided workflows
+
+## Benefits
+
+✅ Consistent code style across your entire stack
+✅ Language-specific best practices automatically applied
+✅ Expert agents available for specialized guidance
+✅ Proven workflows for common development tasks
+✅ Saves time by eliminating manual code style corrections
