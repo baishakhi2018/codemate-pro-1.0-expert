@@ -1,0 +1,57 @@
+{
+  "name": "codemate-pro",
+  "version": "1.0.0",
+  "description": "Multi-language component generator with AI-assisted development support for React, Angular, Python, Node.js, and Java",
+  "main": "src/generator/cli.js",
+  "bin": {
+    "codemate": "./src/generator/cli.js"
+  },
+  "scripts": {
+    "generate": "node src/generator/cli.js generate",
+    "interactive": "node src/generator/cli.js interactive",
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "test": "vitest",
+    "lint": "eslint src --ext .ts,.tsx,.js",
+    "format": "prettier --write src"
+  },
+  "keywords": [
+    "component-generator",
+    "react",
+    "angular",
+    "python",
+    "nodejs",
+    "java",
+    "copilot",
+    "ai-assisted",
+    "code-generation",
+    "cli"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/codemate-pro.git"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "@vitejs/plugin-react": "^4.0.0",
+    "autoprefixer": "^10.4.14",
+    "eslint": "^8.50.0",
+    "postcss": "^8.4.24",
+    "prettier": "^3.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "tailwindcss": "^3.3.0",
+    "typescript": "^5.0.0",
+    "vite": "^4.3.0",
+    "vitest": "^0.34.0"
+  }
+}
